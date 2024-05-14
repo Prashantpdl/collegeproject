@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add tour</title>
+    <link rel="stylesheet" href="public/css/addtour.css">
+    <script src="./public/javascript/SignUpValidation.js"></script>
+    <style>
+      body{background-color: steelblue;
+
+      }
+        #gotohome{
+          text-decoration: none;
+           margin-top: 40px;
+           border: 2px solid red;
+           border-radius: 10px;
+           padding: 3px;
+           position:  relative;
+          }
+</style>
+</head>
+<body>
+    <form id="tour-form" >
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required minlength="10" maxlength="40">
+    
+    
+      <label for="duration">Duration (in days):</label>
+      <input type="number" id="duration" name="duration" required>
+    
+      <label for="max-group-size">Max group size:</label>
+      <input type="number" id="max-group-size" name="maxGroupSize" required>
+    
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty" name="difficulty" required>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="difficult">Difficult</option>
+      </select>
+      <select id="guide" name="guide" required>
+      
+      </select>
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" required>
+    
+      <label for="price-discount">Price discount:</label>
+      <input type="number" id="price-discount" name="priceDiscount">
+    
+      <label for="summary">Summary:</label>
+      <textarea id="summary" name="summary" required></textarea>
+    
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea>
+    
+      <label for="image-cover">Cover image:</label>
+      <input type="file" id="image-cover" name="imageCover" required><br>
+    
+
+    
+      <label for="start-dates">Start dates:</label><br>
+      <input type="date" id="start-dates" name="startDates"><br>
+    
+    
+      <button type="submit">Submit</button>
+      <a href="index.html" id="gotohome">Back to home page</a>
+    </form>
+
+    <script>
+        function getCookie(name) {
+             const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+                
+        }
+      function fileToBase64(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+          });
+      }
+      async function getGuides() {
+       const id = await getCookie('id')
+       console.log(id)
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/users/addedby',{
+            method:'POST',
+            headers: {
+                        'Content-Type': 'application/json'
+                    },
+            body :JSON.stringify({id })
+    });
+    const data = await response.json();
+    console.log(data)
+
+    if (data.status === 'success') {
+      const guides = data.users
+      const guideSelect = document.getElementById('guide');
+
+      for (let i = 0; i < guides.length; i++) {
+        const option = document.createElement('option');
+        option.text = guides[i].name;
+        option.value = guides[i]._id;
+        guideSelect.add(option);
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+     getGuides()
+
+        const form = document.getElementById('tour-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const duration = document.getElementById('duration').value;
+            const maxGroupSize = document.getElementById('max-group-size').value;
+            const difficulty = document.getElementById('difficulty').value;
+            const guide = document.getElementById('guide').value;
+            console.log(guide)
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const imagedata = document.getElementById('image-cover').files[0];
+            const summary = document.getElementById('summary').value;
+            const startDates = document.getElementById('start-dates').value;
+            const addedBy = await getCookie('id')
+    
+            const imageCover = imagedata.name;
+           
+
+            try {
+                
+                const response = await fetch('http://localhost:3000/api/v1/tours', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({name,duration,maxGroupSize,imageCover,difficulty,price,description,summary,startDates,addedBy,guide})
+                });
+
+                const data = await response.json();
+                if(data.status == 'success'){
+                    alert('Tour added successfully')
+                }
+                else{
+                  console.log(data.code)
+                   if(data.code == '11000'){
+                      alert("Duplicate name, Enter new")
+                   }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
+</body>
+</html>

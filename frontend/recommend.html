@@ -1,0 +1,380 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tour and  Travel </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- css  -->
+    <link rel="stylesheet" href="public/css/sty.css">
+    <script type="text/javascript" src="./public/javascript/nav.js"></script>
+    <style>
+                #loginid{
+            font-size: 20px;
+            height: 30px;
+            margin-right: 300px;
+            margin-bottom: 130px;
+            border-radius: 10px;
+            color: black;
+            padding-top: 3px;
+            background-color: wheat;
+            border: 2px solid white;
+        }
+            .container {
+            display: flex;
+            justify-content: center; /* Centers the items horizontally */
+            align-items: center;
+            width: 100%;
+             /* Centers the items vertically *//* Adjust the height as needed */
+            }
+
+            .centered, input {
+                display: flex;
+                width: 80%;
+                height: 50px;
+
+            }
+            #sbtn{width: 10%;}
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="centered">
+          <input type="text" id="searchtext" placeholder="Search">
+          <button id="sbtn" onclick="showsearch()">Search</button>
+        </div>
+      </div>
+      
+    <section class="tour" id="tour">
+     <div class="main-container" id="main-container">
+        <div class="tour-cards">
+            <div class="image-box">
+                <img src="./public/img/octane.jpg" alt="annapurna ">
+                <div class="overlay"></div>
+
+            </div>
+            <div class="tour-cards-text">
+                <h1>Annapurna Basecamp Trip</h1>
+                <p>Welcome to the Annapurna Base Camp trek, one of the most popular and scenic treks in
+                    Nepal. This trek takes you through a diverse landscape of lush forests, terraced fields,
+                    traditional villages, and stunning mountain vistas, culminating in the breathtaking view
+                    of the Annapurna massif from the base camp.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+    function getCookie(name) {
+    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
+                
+}
+    const getuserid  = async () =>{
+            try{
+                const response =  await fetch('http://localhost:3000/api/v1/users/getuserfromtoken', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    token:getCookie('token')
+                                })
+                            })
+                const data =  await response.json()
+                return data
+            }
+            catch(err){
+                console.log(err)
+            }
+        } 
+    const resultsDiv = document.getElementById('main-container')
+        
+        fetch('http://localhost:3000/api/v1/tours',{
+            method:'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+        
+        
+            data.data.forEach(async tour => {
+                const tourDiv = document.createElement('div');
+tourDiv.classList.add('tour-cards');
+
+const imageBox = document.createElement('div');
+imageBox.classList.add('image-box');
+
+const image = document.createElement('img');
+image.setAttribute('src', `http://127.0.0.1:5500/images/${tour.imageCover} `);
+
+
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+
+const imageBoxText = document.createElement('div');
+imageBoxText.classList.add('image-box-text');
+
+
+
+
+
+imageBox.appendChild(image);
+imageBox.appendChild(overlay);
+imageBox.appendChild(imageBoxText);
+
+const tourCardsText = document.createElement('div');
+tourCardsText.classList.add('tour-cards-text');
+
+const h1 = document.createElement('h1');
+h1.textContent = tour.name;
+
+const p2 = document.createElement('p');
+p2.textContent = tour.summary;
+const p6 = document.createElement('p');
+p6.textContent = tour.description;
+const h23 = document.createElement('h2');
+h23.textContent = 'Start Date:' + tour.startDates[0];
+const price = document.createElement('div');
+price.classList.add('price');
+
+const p3 = document.createElement('p');
+p3.textContent = tour.price + ' ';
+const span = document.createElement('span');
+span.textContent = 'Per person';
+p3.appendChild(span);
+
+const h22 = document.createElement('h2');
+h22.textContent = 'Duration:' + tour.duration;
+
+price.appendChild(p3);
+price.appendChild(h22);
+
+tourCardsText.appendChild(h1);
+tourCardsText.appendChild(p2);
+tourCardsText.appendChild(p6);
+tourCardsText.appendChild(h23);
+tourCardsText.appendChild(price);
+tourDiv.appendChild(imageBox);
+tourDiv.appendChild(tourCardsText);        
+const response =  await fetch(`http://localhost:3000/api/v1/tours/numberofbookings/${tour._id}`)
+const data =  await response.json()
+if(getCookie('token')){
+if(tour.maxGroupSize >= data){
+    const button = document.createElement('button');
+    button.addEventListener('click', function() {
+    booktour(tour._id, tour.price);
+    });
+    button.textContent = 'Book Tour';
+    tourDiv.appendChild(button);
+}
+else {
+    const full = document.createElement('p')
+    p.innerText = 'SEATS NOT AVAILABLE'
+    tourDiv.appendChild(full)
+}}else{
+    const login = document.createElement("a")
+    login.href ='login.html'
+    login.textContent = 'Log in to book a tour';
+    login.setAttribute("id", "loginid");
+    tourDiv.appendChild(login)
+}
+
+               
+
+
+
+
+
+
+      resultsDiv.appendChild(tourDiv);
+    });
+})
+.catch(error => console.error(error));
+async function booktour(tour,price){
+        
+        const userdata = await getuserid()
+        console.log(userdata)
+        const user = userdata._id
+        const paid = true;
+        
+    
+            // const payresponse = await fetch('http://localhost:3000/pay', {
+            //                 method: 'POST',
+            //                 headers: {
+            //                     'Content-Type': 'application/json'
+            //                 }
+                            
+            // });
+            
+            // const payresult = await payresponse.json();
+            
+            
+                const response = await fetch('http://localhost:3000/api/v1/booking', {
+                        method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                tour,
+                                user,
+                                price,
+                                paid
+    
+                            })
+                        });
+        
+                       const data = await response.json();
+                       if(data.status == 'success'){
+                     
+                        const idForPayment  = data.data.doc._id
+                 
+                        try{
+                            console.log(price)
+                            const body =  {
+                            "return_url":"http://127.0.0.1:5500/frontend/bookingsuccess.html",
+                                "website_url":"http://127.0.0.1:5500",
+                                "amount":price*100,
+                                "purchase_order_id": idForPayment,
+                                "purchase_order_name":idForPayment
+                            }
+                          const response = await fetch('http://localhost:3000/pay', {
+                              method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(body)})
+                            console.log(response)
+                            const url = await response.json()
+                            window.location.href = url
+                      
+                      
+                    }
+                    catch (error) {
+                        console.log(error);
+                  }
+                }else{
+                    alert('You have already booked this tour')
+                }
+                
+                     
+    }   
+function showsearch(){
+    const searchtext = document.getElementById('searchtext').value;
+    const resultsDiv = document.getElementById('main-container')
+    resultsDiv.innerHTML = ''
+        
+        fetch(`http://localhost:3000/api/v1/tours/search?q=${searchtext}`,{
+            method:'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                
+        
+            data.data.tours.forEach(async tour => {
+                console.log(tour)
+                const tourDiv = document.createElement('div');
+tourDiv.classList.add('tour-cards');
+
+const imageBox = document.createElement('div');
+imageBox.classList.add('image-box');
+
+const image = document.createElement('img');
+image.setAttribute('src', `http://127.0.0.1:8080/${tour.imageCover}`);
+image.setAttribute('alt', 'Cover Image ');
+
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+
+const imageBoxText = document.createElement('div');
+imageBoxText.classList.add('image-box-text');
+
+
+
+
+
+
+
+imageBox.appendChild(image);
+imageBox.appendChild(overlay);
+imageBox.appendChild(imageBoxText);
+
+const tourCardsText = document.createElement('div');
+tourCardsText.classList.add('tour-cards-text');
+
+const h1 = document.createElement('h1');
+h1.textContent = tour.name;
+
+const p2 = document.createElement('p');
+p2.textContent = tour.summary;
+
+const p6 = document.createElement('p');
+console.log(tour)
+p6.textContent = tour.description;
+const h23 = document.createElement('h2');
+h23.textContent = 'Start Date:' + tour.startDates[0];
+const price = document.createElement('div');
+price.classList.add('price');
+
+
+const p3 = document.createElement('p');
+p3.textContent = tour.price + ' ';
+const span = document.createElement('span');
+span.textContent = 'Per person';
+p3.appendChild(span);
+
+const h22 = document.createElement('h2');
+h22.textContent = 'Duration:' + tour.duration;
+
+price.appendChild(p3);
+price.appendChild(h22);
+
+tourCardsText.appendChild(h1);
+tourCardsText.appendChild(p2);
+tourCardsText.appendChild(h23);
+tourCardsText.appendChild
+tourCardsText.appendChild(p6);
+tourCardsText.appendChild(price);
+tourDiv.appendChild(imageBox);
+tourDiv.appendChild(tourCardsText);        
+const response =  await fetch(`http://localhost:3000/api/v1/tours/numberofbookings/${tour._id}`)
+const data =  await response.json()
+if(!getCookie()){
+if(tour.maxGroupSize >= data){
+    const button = document.createElement('button');
+    button.addEventListener('click', function() {
+    booktour(tour._id, tour.price);
+    });
+    button.textContent = 'Book Tour';
+    tourDiv.appendChild(button);
+}
+else {
+    const full = document.createElement('p')
+    p.innerText = 'SEATS NOT AVAILABLE'
+    tourDiv.appendChild(full)
+}
+}else{
+    const login = document.createElement("a")
+    login.href ='login.html'
+    login.textContent = 'Log in to book a tour';
+    login.setAttribute("id", "loginid");
+    tourDiv.appendChild(login)
+}
+
+               
+
+
+
+
+
+
+      resultsDiv.appendChild(tourDiv);
+    });
+})
+}
+</script>
+</body>
+</html>

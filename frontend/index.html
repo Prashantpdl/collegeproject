@@ -1,0 +1,589 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tour AND Travel</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- css  -->
+    <link rel="stylesheet" href="public/css/sty.css">
+    <script type="text/javascript" src="./public/javascript/nav.js"></script>
+    <style>
+        #loginid{
+            font-size: 20px;
+            height: 30px;
+            margin-right: 300px;
+            margin-bottom: 130px;
+            border-radius: 10px;
+            color: black;
+            padding-top: 3px;
+            background-color: wheat;
+            border: 2px solid white;
+        }
+        #book{
+            font-size: 20px;
+            height: 30px;
+            margin-right: 350px;
+            margin-bottom: 130px;
+            border-radius: 10px;
+            color: black;
+            padding-top: 3px;
+            background-color: wheat;
+            border: 2px solid white;
+            width: auto;
+        }
+        .full{
+           margin-bottom: 150px;
+           color:red;
+           height: 100px;
+           width: 100px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="container">
+
+            
+            <ul>
+                <li><a href="#banner" class="current">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#media">Media</a></li>
+                <li ><a id="nameorlogin" href="./Login.html">Login</a></li>
+                <li ><a id="addtour"   style="display: none;"  href="./addtour.html">Add tour</a></li>
+                <li ><a id="adduser"  style="display: none;"  href="./SignUp.html">Add Admin</a></li>
+                <li ><a id="addguide"   style="display: none;"  href="./addguide.html">Add Guide</a></li>
+                <li ><a id="tours"   style="display: none;"  href="./tours.html"> Your Tours</a></li>
+                <li ><a id="guides"   style="display: none;"  href="./guides.html"> Your Guides</a></li>
+                <li ><a id="addadmin" style="display:none;" href="./addadmin.html">Add admin</a></li>
+                <li ><a id="admin" style="display:none;" href="./admin.html">Your admin</a></li>
+                <li ><a id="tourforguide" style="display:none;" href="./tourforguide.html">Your tours</a></li>
+                <li ><a id="usertours" style="display:none;" href="./usertours.html">Your tours</a></li>
+            </ul>
+            <div class="btn-group">
+                <a href="recommend.html" style="display:block;" id="recmd" class="btn btn-try">
+                    Recommended Tours
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main  -->
+    <main>
+
+        <!-- banner  -->
+
+        <section class="banner" id="banner">
+            <div class="banner-text">
+                <h1>Tourify </h1>
+                <P>Tourify  provides u the best tourism places. Book online.</P>
+               
+            </div>
+            <div class="overlay2">
+
+            </div>
+        </section>
+        <!-- explore  -->
+        <section class="explore" id="explore">
+            <div class="main-text">
+                <h2>Explore</h2>
+                <h1><span>N</span>epal </h1>
+                <p>This place amazes with its fabulous atmosphere and nature</p>
+            </div>
+            <div class="main-container" >
+                <div class="image-box image-1">
+                    <img src="https://images.unsplash.com/photo-1603226851957-1768f812309b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                        alt="">
+                    <div class="overlay"></div>
+                    <div class="image-box-text">
+                        <h2>Kathmandu</h2>
+                        <p>Capital city of Nepal</p>
+                    </div>
+                </div>
+                <div class="image-box image-1">
+                    <img src="https://images.unsplash.com/photo-1534804101463-987ef0c79d54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                        alt="">
+                    <div class="overlay"></div>
+                    <div class="image-box-text">
+                        <h2>Everest</h2>
+                        <p>Highest Mountain</p>
+                    </div>
+                </div>
+                <div class="image-box image-1">
+                    <img src="https://images.unsplash.com/photo-1556554883-5701482655e0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                        alt="">
+                    <div class="overlay"></div>
+                    <div class="image-box-text">
+                        <h2>Pokhara</h2>
+                        <p>Phewa Lake</p>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+
+        <!-- about  -->
+        <section class="about" id="about">
+            <div class="main-text">
+                <h1>Unforgettable <span>S</span>ensations</h1>
+                <p>Tour and Travel can help you plan the perfect trip to Nepal. We can help you book the most comfortable and convenient hotels, so you can focus on enjoying your adventure in Nepal. Whether you want to trek to the base camp of Mount Everest, explore the ancient cities of Kathmandu and 
+                    Bhaktapur, or go on a wildlife safari in Chitwan National Park, we can make it happen.</p>
+            </div>
+            <div class="main-container">
+                <video
+                    src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-lush-river-valley-and-snowy-mountains-15919-large.mp4"
+                    autoplay loop muted></video>
+            </div>
+            <!-- tour  -->
+
+            <section class="tour" id="tour">
+
+                <div class="main-container" id="main-container">
+                    <div class="main-text">
+                        <h2>2024</h2>
+                        <h1>Tours</h1>
+                    </div>
+                    <div class="tour-cards">
+                        <div class="image-box">
+                            <img src="./public/img/octane.jpg" alt="annapurna ">
+                            <div class="overlay"></div>
+
+                        </div>
+                        <div class="tour-cards-text">
+                            <h1>Annapurna Basecamp Trip</h1>
+                            <p>Welcome to the Annapurna Base Camp trek, one of the most popular and scenic treks in
+                                Nepal. This trek takes you through a diverse landscape of lush forests, terraced fields,
+                                traditional villages, and stunning mountain vistas, culminating in the breathtaking view
+                                of the Annapurna massif from the base camp.</p>
+                        </div>
+                    </div>
+            </section>
+            <section class="media" id="media">
+                <div class="main-text">
+                    <h2>Media</h2>
+                    <h1>Nepal Footage</h1>
+                </div>
+                <div class="main-container">
+                    <div class="image image-1">
+                        <img src="./public/img/dadheldhura.jpg" alt="">
+                        <h3>Dadeldhura Snowfall</h3>
+                    </div>
+                    <div class="image image-2">
+                        <img src="./public/img/everest.jpg" alt="everest2 ">
+                        <h3>Everest Viewtour</h3>
+                    </div>
+                    <div class="image image-3">
+                        <img src="./public/img/lumbini.jpg" alt="lumbini">
+                        <h3>Lumbini</h3>
+                    </div>
+                    <div class="image image-4">
+                        <img src="./public/img/narayani river.jpg" alt="Narayani">
+                        <h3>Narayani River</h3>
+                    </div>
+                    <div class="image image-5">
+                        <img src="./public/img/monkey.jpg" alt="monkey">
+                        <h3>Nepal's monkey</h3>
+                    </div>
+                    <div class="image image-6">
+                        <img src="./public/img/jogi.jpg" alt=" pashupati">
+                        <h3>Pashupatinath jogi</h3>
+                    </div>
+                    <div class="image image-7">
+                        <img src="./public/img/mardi.jpg" alt="mardi">
+                        <h3>Mardi Himal</h3>
+                    </div>
+                    <div class="image image-8">
+                        <img src=   "./public/img/gosaikunda.jpg" alt="gosaikunda">
+                        <h3>Gosaikunda</h3>
+                    </div>
+                    <div class="image image-9">
+                        <img src="./public/img/pumdikot.jpg" alt=" shiv">
+                        <h3> Shiva Temple </h3>
+                    </div>
+
+                </div>
+            </section>
+
+           
+           
+
+            
+    </main>
+
+    <footer>
+        <div class="footer-image">
+            <div class="overlay1"></div>
+            <div class="overlay2"></div>
+
+        </div>
+        <div class="main-container">
+            <div class="heading-foo">
+                <img src="public/images/logo/iceland.svg" alt="">
+                <h1>NEPAL</h1>
+                <p>EVERYTHING IS BEAUTIFUL NEPAL , ESPECIALLY FOOD, AND ESPECIALLY HEALTHY FOOD</p>
+            </div>
+            <div class="social-media">
+                <h1>Connect with us</h1>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill">
+                            <path
+                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                        </svg>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill">
+                            <path
+                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+            <div class="main">
+                <h1>Quick Links</h1>
+                <ul>
+                    <li><a href="#explore">Explore</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#tour">Tours</a></li>
+                    <li><a href="#media">Media</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h1>Contacts</h1>
+                <div class="contact-info-text">
+                    <p>+977-9826125479</p>
+                    <p>Tourify.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="credit">
+            <h3>🖥️ Design and Developed By <a href="">Prashant Poudel </a></h3>
+        </div>
+    </footer>
+
+    </section>
+
+
+
+
+</body>
+     <script>
+        function getCookie(name) {
+            const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+                
+   }
+       const getuserid  = async () =>{
+            try{
+                const response =  await fetch('http://localhost:3000/api/v1/users/getuserfromtoken', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    token:getCookie('token')
+                                })
+                            })
+                const data =  await response.json()
+                return data
+            }
+            catch(err){
+                console.log(err)
+            }
+        } 
+        function deleteCookie(name) {
+            document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }  
+       
+                      
+        const resultsDiv = document.getElementById('main-container')
+        
+        
+        fetch('http://localhost:3000/api/v1/tours',{
+            method:'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+        
+        
+            data.data.forEach(async tour => {
+                const tourDiv = document.createElement('div');
+tourDiv.classList.add('tour-cards');
+
+const imageBox = document.createElement('div');
+imageBox.classList.add('image-box');
+
+const image = document.createElement('img');
+image.setAttribute('src', `http://127.0.0.1:5500/images/${tour.imageCover}`);
+image.setAttribute('alt', 'Cover Image');
+console.log(tour.imageCover)
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+
+const imageBoxText = document.createElement('div');
+imageBoxText.classList.add('image-box-text');
+
+
+
+imageBox.appendChild(image);
+imageBox.appendChild(overlay);
+imageBox.appendChild(imageBoxText);
+
+const tourCardsText = document.createElement('div');
+tourCardsText.classList.add('tour-cards-text');
+
+const h1 = document.createElement('h1');
+h1.textContent = tour.name;
+
+const p2 = document.createElement('p');
+p2.textContent = tour.summary;
+
+const p6 = document.createElement('p');
+console.log(tour)
+p6.textContent = tour.description;
+const price = document.createElement('div');
+price.classList.add('price');
+
+const p3 = document.createElement('p');
+p3.textContent = tour.price + ' ';
+const span = document.createElement('span');
+span.textContent = 'Per person';
+p3.appendChild(span);
+
+const h22 = document.createElement('h2');
+h22.textContent = 'Duration:' + tour.duration;
+
+const h23 = document.createElement('h2');
+h23.textContent = 'Start Date:' + tour.startDates[0];
+
+price.appendChild(p3);
+price.appendChild(h22);
+
+tourCardsText.appendChild(h1);
+tourCardsText.appendChild(p2);
+tourCardsText.appendChild(p6)
+tourCardsText.appendChild(h23)
+tourCardsText.appendChild(price);
+tourDiv.appendChild(imageBox);
+tourDiv.appendChild(tourCardsText);        
+const response =  await fetch(`http://localhost:3000/api/v1/tours/numberofbookings/${tour._id}`)
+const data =  await response.json()
+if(getCookie('token')){
+    if(tour.maxGroupSize >= data){
+    const button = document.createElement('button');
+   
+    
+    button.setAttribute("id", "book");
+    button.addEventListener('click', function() {
+    booktour(tour._id, tour.price);
+    });
+    button.textContent = 'Book Tour';
+    tourDiv.appendChild(button);
+    
+}
+else {
+    const full = document.createElement('p')
+    p.innerText = 'SEATS NOT AVAILABLE'
+    full.setAttribute("class", "full");
+    full.style.color ='red'
+
+    tourDiv.appendChild(full)
+}}else{
+    const login = document.createElement("a")
+    login.href ='login.html'
+   
+    login.textContent = 'Log in to book a tour';
+    login.setAttribute("id", "loginid");
+    tourDiv.appendChild(login)
+}
+          
+
+
+
+
+
+
+      resultsDiv.appendChild(tourDiv);
+    });
+})
+.catch(error => console.error(error));
+
+
+    
+const ifloggedin  = async () =>{
+    try{
+        const response =  await fetch('http://localhost:3000/api/v1/users/getuserfromtoken', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            token:getCookie('token')
+                        })
+                    })
+         const data =  await response.json()
+         const namediv =  document.getElementById('nameorlogin')
+         namediv.href = 'logout.html'
+         namediv.innerHTML =  `Logout ${data.name}`
+         namediv.addEventListener('click',() =>{
+                    deleteCookie('token')
+                    namediv.href = 'index.html'
+         })
+         const addtour = document.getElementById('addtour')
+        const adduser = document.getElementById('adduser')
+        const addguide = document.getElementById('addguide')
+        const guides = document.getElementById('guides')
+        const tours = document.getElementById('tours')
+        const admin = document.getElementById('admin')
+        const addadmin =  document.getElementById('addadmin')
+        const recmd = document.getElementById('recmd')
+        const resultsDiv = document.getElementById('main-container')
+        const tourforguide = document.getElementById('tourforguide')
+        const userstours = document.getElementById('usertours')
+        if(data.role == 'admin'){
+            console.log(data.role)
+            addtour.style.display = "block";
+            addguide.style.display ="block"
+            guides.style.display ="block"
+            tours.style.display ="block"
+            recmd.style.display ="none"
+
+        }
+        if(data.role == 'system-admin'){
+            console.log(data.role)
+            admin.style.display = 'block'
+            addadmin.style.display = 'block'
+            recmd.style.display ="none"
+        }
+        if(data.role =='guide'){
+            tourforguide.style.display ='block'
+            recmd.style.display ="none"
+        }
+        if(data.role != 'user'){
+            resultsDiv.style.display = 'none'
+        }
+        if(data.role == 'user'){
+            userstours.style.display = 'block'
+        }
+
+       }
+       catch(err){
+        console.log(err)
+       }
+}
+if(getCookie('token')){
+    console.log(getCookie('token'))
+    ifloggedin()
+}
+function deleteCookie(name) {
+  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+async function booktour(tour,price){
+        
+    const userdata = await getuserid()
+    console.log(userdata)
+    const user = userdata._id
+    const paid = true;
+    
+
+        // const payresponse = await fetch('http://localhost:3000/pay', {
+        //                 method: 'POST',
+        //                 headers: {
+        //                     'Content-Type': 'application/json'
+        //                 }
+                        
+        // });
+        
+        // const payresult = await payresponse.json();
+        
+        
+            const response = await fetch('http://localhost:3000/api/v1/booking', {
+                    method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            tour,
+                            user,
+                            price,
+                            paid
+
+                        })
+                    });
+    
+                   const data = await response.json();
+                   if(data.status == 'success'){
+                 
+                    const idForPayment  = data.data.doc._id
+             
+                    try{
+                        console.log(price)
+                        const body =  {
+                        "return_url":"http://127.0.0.1:5500/frontend/bookingsuccess.html",
+                            "website_url":"http://127.0.0.1:5500",
+                            "amount":price*100,
+                            "purchase_order_id": idForPayment,
+                            "purchase_order_name":idForPayment
+                        }
+                      const response = await fetch('http://localhost:3000/pay', {
+                          method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(body)})
+                        console.log(response)
+                        const url = await response.json()
+                        window.location.href = url
+                  
+                  
+                }
+                catch (error) {
+                    console.log(error);
+              }
+            }else{
+                alert('You have already booked this tour')
+            }
+            
+                 
+}        
+
+async function canceltour(tour,price){
+    const user = await getuserid()
+    const paid = false;
+    try {
+                    const response = await fetch('http://localhost:3000/api/v1/booking', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            tour,
+                            user,
+                            price,
+                            paid
+
+                        })
+                    });
+    
+                    const data = await response.json();
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+}  
+    
+    
+  
+  
+    </script>
+</html>

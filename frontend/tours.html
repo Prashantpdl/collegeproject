@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tours</title>
+    <style>
+        .card {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+
+      .card h2 {
+        margin-top: 0;
+      }
+
+      .card p {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .card button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        margin-right: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .card button.edit {
+        background-color: #2196F3;
+      }
+
+      .card button.delete {
+        background-color: #F44336;
+      }
+
+      .form-container {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  width: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+      .form-container.show {
+        display: block;
+      }
+
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-container input {
+        margin-bottom: 8px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .form-container button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        margin-top: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tours"></div>
+      <a href="index.html">Back to home</a>
+    <div class="form-container" id="edit-form">
+      <h2>Edit Tour</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" />
+
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" />
+
+        <label for="max-group-size">Max Group Size:</label>
+        <input type="text" id="max-group-size" />
+
+        <label for="difficulty">Difficulty:</label>
+        <input type="text" id="difficulty" />
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" />
+
+        <label for="summary">Summary:</label>
+        <textarea id="summary"></textarea>
+
+        <label for="description">Description:</label>
+        <textarea id="description"></textarea>
+
+        <button  id="save-button">Save</button>
+      </form>
+    </div>
+
+    <script>
+        function getCookie(name) {
+                const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                return cookieValue ? cookieValue.pop() : '';
+                
+        }
+        var id = getCookie('id')
+       
+      // Fetch the tours data from the API
+      fetch('http://localhost:3000/api/v1/tours/addedby', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id})
+      })
+        .then(response => response.json())
+        .then(data => {
+          const toursContainer = document.getElementById('tours');
+
+          // Loop through the tours and create a card for each one
+          data.users.forEach(tour => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const title = document.createElement('h2');
+            title.textContent = tour.name;
+            card.appendChild(title);
+
+            const duration = document.createElement('p');
+            duration.textContent = `Duration: ${tour.duration}`;
+            card.appendChild(duration);
+
+            const maxGroupSize = document.createElement('p');
+            maxGroupSize.textContent = `Max Group Size: ${tour.maxGroupSize}`;
+            card.appendChild(maxGroupSize);
+
+            const difficulty = document.createElement('p');
+            difficulty.textContent = `Difficulty: ${tour.difficulty}`;
+            card.appendChild(difficulty);
+
+            const price = document.createElement('p');
+            price.textContent = `Price: ${tour.price}`;
+            card.appendChild(price);
+
+            const summary = document.createElement('p');
+            summary.textContent = tour.summary;
+            card.appendChild(summary);
+
+            const description = document.createElement('p');
+            description.textContent = tour.description;
+            card.appendChild(description);
+
+            const editButton = document.createElement('button');
+            editButton.classList.add('edit');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+              const formContainer = document.getElementById('edit-form');
+              formContainer.classList.add('show');
+
+      // Fill the form with the tour data
+                const nameInput = formContainer.querySelector('#name');
+                const durationInput = formContainer.querySelector('#duration');
+                const maxGroupSizeInput = formContainer.querySelector('#max-group-size');
+                const difficultyInput = formContainer.querySelector('#difficulty');
+                const priceInput = formContainer.querySelector('#price');
+                const summaryInput = formContainer.querySelector('#summary');
+                const descriptionInput = formContainer.querySelector('#description');
+                const savebtn = document.getElementById('save-button')
+                savebtn.onclick = (e) =>{
+                  e.preventDefault()
+                  savedata(tour._id)
+                }
+
+                nameInput.value = tour.name;
+                durationInput.value = tour.duration;
+                maxGroupSizeInput.value = tour.maxGroupSize;
+                difficultyInput.value = tour.difficulty;
+                priceInput.value = tour.price;
+                summaryInput.value = tour.summary;
+                descriptionInput.value = tour.description;
+            });
+            card.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+              deletetour(tour._id)
+            });
+            card.appendChild(deleteButton);
+
+            toursContainer.appendChild(card);
+          });
+        })
+        .catch(error => console.error(error));
+        // const savebtn = document.getElementById('save-button')
+        // savebtn.addEventListener('click',async () =>{
+        //       console.log('clicked')
+        //        const formContainer = document.getElementById('edit-form');
+        //         const name = formContainer.querySelector('#name').value;
+        //         const duration = formContainer.querySelector('#duration').value;
+        //         const maxGroupSize = formContainer.querySelector('#max-group-size').value;;
+        //         const difficulty = formContainer.querySelector('#difficulty').value;;
+        //         const price = formContainer.querySelector('#price').value;;
+        //         const summary = formContainer.querySelector('#summary').value;;
+        //         const description = formContainer.querySelector('#description').value;
+                
+        //         try {
+                
+        //         const response = await fetch(`http://localhost:3000/api/v1/tours/update/${id}`, {
+        //             method: 'PATCH',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify({name,duration,maxGroupSize,difficulty,price,description,summary,addedBy:id})
+        //         });
+
+        //         const data = await response.json();
+        //         if(data.status == 'success'){
+        //             prompt('Tour udapted successfully')
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // })
+       async function savedata(id){
+        
+        const formContainer = document.getElementById('edit-form');
+                const name = formContainer.querySelector('#name').value;
+                const duration = formContainer.querySelector('#duration').value;
+                const maxGroupSize = formContainer.querySelector('#max-group-size').value;;
+                const difficulty = formContainer.querySelector('#difficulty').value;;
+                const price = formContainer.querySelector('#price').value;;
+                const summary = formContainer.querySelector('#summary').value;;
+                const description = formContainer.querySelector('#description').value;
+              
+                try {
+                
+                const response = await fetch(`http://localhost:3000/api/v1/tours/update/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({name,duration,maxGroupSize,difficulty,price,description,summary})
+                });
+
+                const data = await response.json();
+                if(data.status == 'success'){
+                  window.location.href= 'tours.html'
+                    prompt('Tour added successfully')
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        async function deletetour(id){
+          try {
+                
+                const response = await fetch(`http://localhost:3000/api/v1/tours/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+                console.log(data)
+                if(data.status == 200){
+                    alert('Tour Deleted successfully')
+                    window.location.href= 'tours.html'
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
+  </body>
+</html>
