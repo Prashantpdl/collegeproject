@@ -75,13 +75,25 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
     console.log('up')
    try{
-        const all = await Model.find()
+    console.log(Model)
+        if (Model.modelName == 'User'){
+            const all = await Model.find({role:'user'})
         console.log('all')
         res.status(200).json({
         status: 'success',
         data: all,
         requestTime: req.requestTime
         })
+        }
+        else{
+            const all = await Model.find()
+        console.log('all')
+        res.status(200).json({
+        status: 'success',
+        data: all,
+        requestTime: req.requestTime
+        })
+        }
         next()
    }catch(err){
         console.log(err)

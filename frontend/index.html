@@ -45,11 +45,9 @@
 
 <body>
 
-    <nav class="nav">
+    <!-- <nav class="nav">
         <div class="container">
-
-            
-            <ul>
+            <ul class="nav-container">
                 <li><a href="#banner" class="current">Home</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#media">Media</a></li>
@@ -63,6 +61,39 @@
                 <li ><a id="admin" style="display:none;" href="./admin.html">Your admin</a></li>
                 <li ><a id="tourforguide" style="display:none;" href="./tourforguide.html">Your tours</a></li>
                 <li ><a id="usertours" style="display:none;" href="./usertours.html">Your tours</a></li>
+                <li ><a id="users" style="display:none;" href="./users.html">Users</a></li>
+            </ul>
+            <div class="btn-group">
+                <a href="recommend.html" style="display:block;" id="recmd" class="btn btn-try">
+                    Recommended Tours
+                </a>
+            </div>
+        </div>
+    </nav> -->
+
+    <nav class="nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggler" id="navbar-toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <ul class="nav-container" id="nav-container">
+                <li><a href="#banner" class="current">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a id="nameorlogin" href="./Login.html">Login</a></li>
+                <li ><a id="addtour"   style="display: none;"  href="./addtour.html">Add tour</a></li>
+                <li ><a id="adduser"  style="display: none;"  href="./SignUp.html">Add Admin</a></li>
+                <li ><a id="addguide"   style="display: none;"  href="./addguide.html">Add Guide</a></li>
+                <li ><a id="tours"   style="display: none;"  href="./tours.html"> Your Tours</a></li>
+                <li ><a id="guides"   style="display: none;"  href="./guides.html"> Your Guides</a></li>
+                <li ><a id="addadmin" style="display:none;" href="./addadmin.html">Add admin</a></li>
+                <li ><a id="admin" style="display:none;" href="./admin.html">Your admin</a></li>
+                <li ><a id="tourforguide" style="display:none;" href="./tourforguide.html">Your tours</a></li>
+                <li ><a id="usertours" style="display:none;" href="./usertours.html">Your tours</a></li>
+                <li ><a id="users" style="display:none;" href="./users.html">Users</a></li>
+                <!-- Add other list items here -->
             </ul>
             <div class="btn-group">
                 <a href="recommend.html" style="display:block;" id="recmd" class="btn btn-try">
@@ -71,6 +102,7 @@
             </div>
         </div>
     </nav>
+    
 
     <!-- main  -->
     <main>
@@ -173,8 +205,8 @@
                         <h3>Dadeldhura Snowfall</h3>
                     </div>
                     <div class="image image-2">
-                        <img src="./public/img/everest.jpg" alt="everest2 ">
-                        <h3>Everest Viewtour</h3>
+                        <img src="./public/img/mteverest.jpg" alt="everest2 ">
+                        <h3>Fishtail Viewtour</h3>
                     </div>
                     <div class="image image-3">
                         <img src="./public/img/lumbini.jpg" alt="lumbini">
@@ -446,6 +478,7 @@ const ifloggedin  = async () =>{
         const tours = document.getElementById('tours')
         const admin = document.getElementById('admin')
         const addadmin =  document.getElementById('addadmin')
+        const users = document.getElementById('users')
         const recmd = document.getElementById('recmd')
         const resultsDiv = document.getElementById('main-container')
         const tourforguide = document.getElementById('tourforguide')
@@ -455,8 +488,10 @@ const ifloggedin  = async () =>{
             addtour.style.display = "block";
             addguide.style.display ="block"
             guides.style.display ="block"
+            users.style.display ="block"
             tours.style.display ="block"
             recmd.style.display ="none"
+            
 
         }
         if(data.role == 'system-admin'){

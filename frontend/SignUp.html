@@ -59,9 +59,12 @@
                 });
 
                 const data = await response.json();
+                console.log (data.id)
                 if(data.status == 'success'){
-                    alert('User added successfully,Please Login')
-                    window.location.href= 'login.html'
+                    localStorage.setItem( 'unverifiedid',data.id)
+                    console.log(data.id)
+                    alert('User added successfully,Please check your email and enter the OTP')
+                    window.location.href= 'verify.html'
                 }else{
                     const errorplacer = document.getElementById('error')
                     errorplacer.innerText = data.message

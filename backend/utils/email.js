@@ -19,12 +19,13 @@ module.exports = class Email {
             }
         })
     }
-    async send(){
+    async send(otp){
        let mailDetails = {
             from: this.from,
             to: this.to,
             subject: 'Test mail',
-            text: ' Welcome to the family. Your account has been registered in our  travel and tours'
+            text: ` Welcome to the family. Your account has been registered in Tourify.com . your otp is ${otp}`
+
         };
 
        await this.newTransport().sendMail(mailDetails)
@@ -56,9 +57,9 @@ module.exports = class Email {
         await this.newTransport().sendMail(mailDetails)
     }
     
-    async sendWelcome(){
+    async sendWelcome(otp){
         try{
-            await this.send()
+            await this.send(otp)
         }catch(err){
             console.log(err)
         }

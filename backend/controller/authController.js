@@ -1,4 +1,5 @@
 const User = require('./../models/userModel');
+const Otp = require('./../models/otp')
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 var jwt = require('jsonwebtoken');
@@ -14,6 +15,10 @@ const signToken = id => {
         expiresIn: '1h'
     });
 }
+const generateRandomNumber = () => {
+    var randomNumber = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+    return randomNumber.toString();
+  };
 
 const createSendToken = async (user, statusCode,req, res) => {
     const token = signToken(user._id)
@@ -33,19 +38,26 @@ const createSendToken = async (user, statusCode,req, res) => {
 exports.signup = async(req, res, next) => {
     
      
-    try {
+    try { 
+         const otp = generateRandomNumber();
         const newUser = await User.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
             passwordConfirm: req.body.passwordConfirm,
             role : req.body.role,
-            addedBy : req.body.addedBy
+            addedBy : req.body.addedBy,
+            number : otp 
+
         });
         const user = await newUser.save()
-
+        const newotp = await Otp.create({
+            email: req.body.email,
+            otp: otp
+        })
+        await newotp.save()
         createSendToken(user, 200, req, res);
-        await new Email(user).sendWelcome();
+        await new Email(user).sendWelcome(otp);
     }catch(err){
         if (err.code === 11000 && err.keyPattern.email) {
             // Handle the duplicate email error
@@ -76,6 +88,9 @@ exports.login = catchAsync(async(req, res, next) => {
     const user = await User.findOne({email: email}).select('+password');
     if(!user){
             res.send({message:"Enter Correct email"})
+    }
+    if (!user.verified & user.role == 'user' ){
+        res.send({message:"User not verified"})
     }
     //check if password is correct
     if(user){

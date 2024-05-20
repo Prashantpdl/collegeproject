@@ -1,18 +1,16 @@
 const crypto = require('crypto');
-const mongoose = require('mongoose')
-var bcrypt = require('bcryptjs');
-const validator = require('validator')
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const validator = require('validator');
 const { Schema } = mongoose;
-
-//name, email, photo, password, passwordConfirm
 
 const userSchema = new Schema({
     name: {
         type: String,
         required: [true, 'Please tell us your name'],
         trim: true,
-        maxlength: [100, 'Name must be less or equal then 100 characters'],
-        minlength: [2, 'Name must be more or equal then 2 characters']
+        maxlength: [100, 'Name must be less or equal to 100 characters'],
+        minlength: [2, 'Name must be more or equal to 2 characters']
     },
     email: {
         type: String,
@@ -24,7 +22,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["user", "guide", "admin","system-admin"],
+        enum: ["user", "guide", "admin", "system-admin"],
         default: "user"
     },
     password: {
@@ -47,24 +45,38 @@ const userSchema = new Schema({
         type: Boolean,
         default: true,
         select: false
+    },
+    number: {
+        type: String,
+        select: false
+    },
+    otpExpiresAt: Date,
+    verified: {
+        type: Boolean,
+        default: false
     }
-})
+});
 
-//pre middleware to hash password before saving
-userSchema.pre('save', async function(next){
-    //only run this function if password was actually modified
-    if(!this.isModified('password')) return next();
+// Pre middleware to hash password before saving
+userSchema.pre('save', async function(next) {
+    // Only run this function if password was actually modified
+    if (!this.isModified('password')) return next();
 
-    //hash password
-    console.log(this.password)
+    // Hash password
     this.password = await bcrypt.hash(this.password, 12);
 
-    //delete passwordConfirm
+    // Delete passwordConfirm
     this.passwordConfirm = undefined;
     next();
-})
+});
 
-
+// Method to generate OTP and set expiration time
+// userSchema.methods.generateOTP = function() {
+//     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generates a 6-digit OTP
+//     this.otp = otp;
+//     this.otpExpiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes in milliseconds
+//     return otp;
+// };
 
 const User = mongoose.model('User', userSchema);
 

@@ -7,7 +7,7 @@ const userController = require('../controller/userController')
 const authController = require('../controller/authController')
 
 //signup and login routes
-router.delete('/:id', userController.deleteTour)
+// router.delete('/:id', userController.deleteTour)
 router.post('/addedby', async (req, res) => {
         
     try {
@@ -20,10 +20,13 @@ router.post('/addedby', async (req, res) => {
     }
 });
 router.post('/savetoken',userController.saveotp)
+router.post('/verifyuser',userController.verifyuser)
 router.post('/checkopt', userController.checkOtp)
 router.post('/changepassword', userController.changePassword)
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
+router.get('/users/', userController.getAllUsers);
+router.delete('/users/:id', userController.deleteuser);
 router.post('/getuserfromtoken', async (req,res) =>{
     try{
         const decoded = jwt.decode(req.body.token)
