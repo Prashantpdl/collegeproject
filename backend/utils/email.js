@@ -49,7 +49,7 @@ module.exports = class Email {
             subject:'OTP',
             text :`Welcome to the group. Your tour to ${name} will start from ${date}. Please contact for more details
             
-                Team Travel and Tour
+               Toruify
                 tourandhotel.help@gmail.com
                 +9779865500000
             `

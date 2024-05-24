@@ -39,6 +39,7 @@
         <option value="medium">Medium</option>
         <option value="difficult">Difficult</option>
       </select>
+      <label for="difficulty">Guide:</label>
       <select id="guide" name="guide" required>
       
       </select>
@@ -120,17 +121,14 @@
             const maxGroupSize = document.getElementById('max-group-size').value;
             const difficulty = document.getElementById('difficulty').value;
             const guide = document.getElementById('guide').value;
-            console.log(guide)
             const price = document.getElementById('price').value;
             const description = document.getElementById('description').value;
             const imagedata = document.getElementById('image-cover').files[0];
             const summary = document.getElementById('summary').value;
             const startDates = document.getElementById('start-dates').value;
             const addedBy = await getCookie('id')
-    
             const imageCover = imagedata.name;
-           
-
+            
             try {
                 
                 const response = await fetch('http://localhost:3000/api/v1/tours', {

@@ -5,9 +5,6 @@ const User = require('../models/userModel');
 
 const userController = require('../controller/userController')
 const authController = require('../controller/authController')
-
-//signup and login routes
-// router.delete('/:id', userController.deleteTour)
 router.post('/addedby', async (req, res) => {
         
     try {
